@@ -1,9 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
-import { initialState } from '../states/auth.state'; // Usar o initialState da AuthState unificada
+import { initialState } from '../states/auth.state'; 
 import * as AuthActions from '../actions/auth.actions';
 
 export const authReducer = createReducer(
-  initialState, // Inicia com o estado inicial definido em auth.state.ts
+  initialState, 
 
   // Ação de início de Sign In
   on(AuthActions.signIn, state => ({
@@ -16,8 +16,8 @@ export const authReducer = createReducer(
   on(AuthActions.signInSuccess, (state, { user, token }) => ({
     ...state,
     isAuthenticated: true,
-    user: user, // O objeto User completo
-    token: token, // O token JWT
+    user: user, 
+    token: token,
     loading: false,
     errorMessage: null
   })),
@@ -26,10 +26,10 @@ export const authReducer = createReducer(
   on(AuthActions.signInFailure, (state, { error }) => ({
     ...state,
     isAuthenticated: false,
-    user: null, // Limpa o usuário em caso de falha
-    token: null, // Limpa o token em caso de falha
+    user: null,
+    token: null, 
     loading: false,
-    errorMessage: error // Armazena a mensagem de erro
+    errorMessage: error 
   })),
 
   // Ação de início de Sign Up
@@ -50,7 +50,7 @@ export const authReducer = createReducer(
   on(AuthActions.signUpFailure, (state, { error }) => ({
     ...state,
     loading: false,
-    errorMessage: error // Armazena a mensagem de erro
+    errorMessage: error 
   })),
 
   // Ação de início de atualização de dados do usuário
@@ -63,7 +63,7 @@ export const authReducer = createReducer(
   // Ação de sucesso de atualização de dados do usuário
   on(AuthActions.updateUserDataSuccess, (state, { user }) => ({
     ...state,
-    user: user, // Atualiza o objeto do usuário com os novos dados
+    user: user,
     loading: false,
     errorMessage: null,
   })),
@@ -87,7 +87,7 @@ export const authReducer = createReducer(
     ...state,
     loading: false,
     errorMessage: null,
-    // O estado de autenticação será limpo completamente pela ação logoutSuccess
+    
   })),
 
   // Ação de falha de exclusão de usuário
@@ -107,7 +107,7 @@ export const authReducer = createReducer(
   // Ação de sucesso de carregamento de dados adicionais do usuário
   on(AuthActions.loadAdditionalUserDataSuccess, (state, { user }) => ({
     ...state,
-    user: user, // Atualiza o objeto do usuário com os dados adicionais
+    user: user, 
     loading: false,
     errorMessage: null,
   })),
@@ -120,24 +120,23 @@ export const authReducer = createReducer(
   })),
 
   // Ação de logout
-  // Esta ação reseta completamente o estado de autenticação para o initialState
+  
   on(AuthActions.logout, () => ({
-    ...initialState // Reseta para o estado inicial
+    ...initialState 
   })),
 
   // Ação de sucesso de logout (redundante se 'logout' já reseta, mas pode ser útil para efeitos colaterais)
   on(AuthActions.logoutSuccess, () => ({
-    ...initialState // Garante que o estado seja limpo completamente
+    ...initialState 
   })),
 
   // Ação para atualizar o estado de autenticação a partir do Local Storage
-  // Esta ação é usada para reinicializar o estado ao carregar a aplicação
   on(AuthActions.updateAuthStateFromLocalStorage, (state, { user, token, isAuthenticated }) => ({
     ...state,
     isAuthenticated: isAuthenticated,
     user: user,
     token: token,
-    loading: false, // Assume que o carregamento já terminou
+    loading: false, 
     errorMessage: null,
   })),
 );

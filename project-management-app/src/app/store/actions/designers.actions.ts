@@ -3,8 +3,7 @@ import { Designer } from '../../core/models/designer.model';
 
 export const loadDesigners = createAction(
 '[Designers API] Load Designers',
-  props<{ companyId?: string }>() // Pode ser filtrado por companyId
-);
+  props<{ companyId?: string }>() 
 
 export const loadDesignersSuccess = createAction(
 '[Designers API] Load Designers Success',

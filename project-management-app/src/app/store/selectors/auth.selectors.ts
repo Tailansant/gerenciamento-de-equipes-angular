@@ -3,8 +3,6 @@ import { AuthState } from '../states/auth.state';
 import { AppState } from '../app.state'; 
 import { UserRole } from 'src/app/core/enums/user-role.enum';
 
-// 1. Feature Selector: Seleciona o 'pedaço' do estado global relacionado à autenticação
-// O nome 'auth' aqui deve corresponder à chave usada no seu ActionReducerMap em AppState
 export const selectAuthState = createFeatureSelector<AppState, AuthState>('auth');
 
 // 2. Seletores para o status de autenticação e detalhes do usuário
@@ -33,7 +31,6 @@ export const selectAuthToken = createSelector(
   (state: AuthState) => state.token // Retorna o token de autenticação
 );
 
-// 3. Seletores derivados das informações do usuário (a partir de selectCurrentUser)
 export const selectCurrentUserId = createSelector(
   selectCurrentUser,
   (user) => user ? user.id : null // Retorna o ID do usuário, se houver
@@ -59,7 +56,6 @@ export const selectUserCompanyId = createSelector(
   (user) => user ? user.companyId : null // Retorna o companyId do usuário, se houver
 );
 
-// 4. Seletores de permissão baseados no papel do usuário
 export const selectIsAdmin = createSelector(
   selectUserRole,
   (role) => role === UserRole.ADMIN // Verifica se o papel é ADMIN
@@ -72,5 +68,5 @@ export const selectIsCompany = createSelector(
 
 export const selectIsDesigner = createSelector(
   selectUserRole,
-  (role) => role === UserRole.DESIGNER // Verifica se o papel é DESIGNER (se aplicável)
+  (role) => role === UserRole.DESIGNER 
 );

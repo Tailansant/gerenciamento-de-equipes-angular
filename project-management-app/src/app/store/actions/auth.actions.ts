@@ -9,7 +9,7 @@ export const signIn = createAction(
 
 export const signInSuccess = createAction(
   '[Auth API] Sign In Success',
-  props<{ user: User; token: string }>() // Inclui o objeto User completo e o token
+  props<{ user: User; token: string }>() 
 );
 
 export const signInFailure = createAction(
@@ -24,7 +24,7 @@ export const signUp = createAction(
 
 export const signUpSuccess = createAction(
   '[Auth API] Sign Up Success',
-  props<{ user: User }>() // Retorna o usuário criado
+  props<{ user: User }>() 
 );
 
 export const signUpFailure = createAction(
@@ -34,7 +34,7 @@ export const signUpFailure = createAction(
 
 // Ações para o fluxo de Logout
 export const logout = createAction(
-  '[Auth] Logout' // Renomeado de 'logOut' para 'logout' para consistência
+  '[Auth] Logout' 
 );
 
 export const logoutSuccess = createAction(
@@ -44,7 +44,7 @@ export const logoutSuccess = createAction(
 // Ações para atualização e exclusão de dados do usuário
 export const updateUserData = createAction(
   '[User] Update User Data',
-  props<{ credentials: Required<Pick<UserCredentials, 'name' | 'login' | 'password'>>; id: string }>() // Ajustado para ser mais específico
+  props<{ credentials: Required<Pick<UserCredentials, 'name' | 'login' | 'password'>>; id: string }>() 
 );
 
 export const updateUserDataSuccess = createAction(
@@ -74,11 +74,10 @@ export const deleteUserFailure = createAction(
 // Ações para inicialização do estado de autenticação (e.g., do localStorage)
 export const updateAuthStateFromLocalStorage = createAction(
   '[Auth] Update Auth State From Local Storage',
-  props<{ user: User | null; token: string | null; isAuthenticated: boolean }>() // Props explicitam o que será atualizado
+  props<{ user: User | null; token: string | null; isAuthenticated: boolean }>() 
 );
 
 // Ação para buscar dados adicionais do usuário (se necessário)
-// Pode ser útil se você precisar carregar o papel ou outras infos após o login inicial
 export const loadAdditionalUserData = createAction(
   '[Auth] Load Additional User Data',
   props<{ userId: string }>()

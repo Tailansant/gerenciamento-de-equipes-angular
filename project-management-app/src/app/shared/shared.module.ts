@@ -13,17 +13,16 @@ import { MatCheckboxModule } from '@angular/material/checkbox'; // Para checkbox
 import { MatChipsModule } from '@angular/material/chips'; // MatChipsModule para chips
 import { MatIconModule } from '@angular/material/icon'; // MatIconModule para ícones
 
-import { NgxSmoothDnDModule } from 'ngx-smooth-dnd'; // Módulo de Drag and Drop
-import { L10nTranslationModule, L10nIntlModule } from 'angular-l10n'; // Módulos de internacionalização
+import { NgxSmoothDnDModule } from 'ngx-smooth-dnd';
+import { L10nTranslationModule, L10nIntlModule } from 'angular-l10n';
 
 // Componentes Shared
 import { ConfirmPopupComponent } from './components/confirm-popup/confirm-popup.component';
 import { CreateBoardPopupComponent } from './components/create-board-popup/create-board-popup.component';
 import { InfoPopupComponent } from './components/info-popup/info-popup.component'; // Componente InfoPopup
 import { NotificationSnackBarComponent } from './components/notification-snack-bar/notification-snack-bar.component';
-// Se o TableComponent e ConfirmationModalComponent existirem, adicione-os
-import { TableComponent } from './components/table/table.component'; // Assumindo que este é o caminho correto
-import { ConfirmationModalComponent } from './components/confirmation-modal/confirmation-modal.component'; // Assumindo que este é o caminho correto
+import { TableComponent } from './components/table/table.component'; 
+import { ConfirmationModalComponent } from './components/confirmation-modal/confirmation-modal.component'; correto
 
 
 @NgModule({
@@ -40,7 +39,7 @@ import { ConfirmationModalComponent } from './components/confirmation-modal/conf
     ReactiveFormsModule,
     FormsModule,
     MatDialogModule,
-    MatCardModule, // Importar MatCardModule
+    MatCardModule, 
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
@@ -48,17 +47,17 @@ import { ConfirmationModalComponent } from './components/confirmation-modal/conf
     MatProgressBarModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatChipsModule, // Importar MatChipsModule
-    MatIconModule, // Importar MatIconModule
-    NgxSmoothDnDModule, // Importar NgxSmoothDnDModule
-    L10nTranslationModule, // Importar L10nTranslationModule
-    L10nIntlModule, // Importar L10nIntlModule
+    MatChipsModule, 
+    MatIconModule, 
+    NgxSmoothDnDModule, 
+    L10nTranslationModule, 
+    L10nIntlModule,
   ],
   exports: [
-    ReactiveFormsModule, // Exportar para uso em outros módulos
-    FormsModule, // Exportar para uso em outros módulos
+    ReactiveFormsModule, 
+    FormsModule, 
     MatDialogModule,
-    MatCardModule, // Exportar MatCardModule
+    MatCardModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
@@ -66,17 +65,17 @@ import { ConfirmationModalComponent } from './components/confirmation-modal/conf
     MatProgressBarModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatChipsModule, // Exportar MatChipsModule
-    MatIconModule, // Exportar MatIconModule
-    NgxSmoothDnDModule, // Exportar NgxSmoothDnDModule
-    L10nTranslationModule, // Exportar L10nTranslationModule
-    L10nIntlModule, // Exportar L10nIntlModule
+    MatChipsModule, 
+    MatIconModule, 
+    NgxSmoothDnDModule, 
+    L10nTranslationModule,
+    L10nIntlModule, 
     ConfirmPopupComponent,
     CreateBoardPopupComponent,
-    InfoPopupComponent, // Exportar InfoPopupComponent
+    InfoPopupComponent,
     NotificationSnackBarComponent,
-    TableComponent, // Exportar TableComponent
-    ConfirmationModalComponent, // Exportar ConfirmationModalComponent
+    TableComponent, 
+    ConfirmationModalComponent,
   ]
 })
 export class SharedModule { }

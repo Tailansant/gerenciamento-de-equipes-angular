@@ -1,4 +1,4 @@
-import { User } from 'src/app/core/models/user.model'; // Verifique o caminho para o seu modelo User
+import { User } from 'src/app/core/models/user.model'; 
 
 export interface AuthState {
   isAuthenticated: boolean; // Indica se o usuário está autenticado
