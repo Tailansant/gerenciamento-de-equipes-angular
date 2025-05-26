@@ -1,0 +1,8 @@
+<mat-dialog-content class="confirm-message">
+  <p class="confirm-message__text">{{confirmMessage}}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-raised-button color="primary"
+    (click)="onConfirmClick()">{{confirmButtonText}}</button>
+  <button mat-raised-button mat-dialog-close>{{cancelButtonText}}</button>
+</mat-dialog-actions>

@@ -1,0 +1,44 @@
+<div class="sign-in__page">
+  <img src="../../../../assets/img/login2.jpg" alt="login" class="sign-in__image">
+  <div class="sign-in__container">
+    <div class="sign-in__top">
+      <h2 class="sign-in__title" l10nTranslate>signIn.title</h2>
+      <p class="sign-in__text" l10nTranslate>
+        signIn.question <a [routerLink]="['/', 'login', 'signup']" l10nTranslate>signIn.answer</a>
+      </p>
+    </div>
+    <form class="sign-in__form" [formGroup]="signInForm" novalidate (ngSubmit)="submit()">
+      <mat-form-field class="form__input" appearance="fill">
+        <mat-label l10nTranslate>signIn.email</mat-label>
+        <input type="email" matInput formControlName="login"
+          placeholder="{{ 'signIn.emailPH' | translate:locale.language }}" />
+        <mat-error *ngIf="displayFormControlErrorMessage('login', 'required')" l10nTranslate>
+          signIn.emailErrorRequired
+        </mat-error>
+        <mat-error *ngIf="displayFormControlErrorMessage('login', 'email')" l10nTranslate>
+          signIn.emailErrorInvalid
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form__input" appearance="fill">
+        <mat-label l10nTranslate>signIn.password</mat-label>
+        <input [type]="hide ? 'password' : 'text'" matInput formControlName="password"
+          placeholder="{{ 'signIn.passwordPH' | translate:locale.language }}" />
+        <button type="button" mat-icon-button matSuffix (mousedown)="toggleHide()"
+          [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" class="hide__btn">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="displayFormControlErrorMessage('password', 'required')" l10nTranslate>
+          signIn.passwordErrorRequired
+        </mat-error>
+      </mat-form-field>
+
+      <div class="sign-in__button">
+        <button mat-raised-button color="primary" type="submit" [disabled]="signInForm.invalid"
+          l10nTranslate>
+          signIn.btn
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

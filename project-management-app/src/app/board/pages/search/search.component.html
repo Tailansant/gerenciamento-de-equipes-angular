@@ -1,0 +1,6 @@
+<div class="search__wrapper">
+  <div *ngFor="let item of (store$ | async | search: searchValue)" >
+    <app-task [taskData]="item"></app-task>
+  </div>
+</div>
+

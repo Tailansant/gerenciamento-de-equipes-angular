@@ -1,0 +1,73 @@
+$title-color: #5d4037;
+$done-color: #2e7d32;
+$warn-color: #b71c1c;
+
+:host {
+  margin: 0 auto;
+}
+
+.edit-title {
+  text-align: center;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+
+  &__buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  &__btn {
+    &:active {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.points {
+  &__list {
+    padding: 0;
+    list-style: none;
+  }
+}
+
+.point {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  &--done {
+    color: $done-color;
+  }
+
+  &--not-ready {
+    color: $warn-color;
+  }
+  &__item {
+    display: flex;
+  }
+
+  &--delete-btn {
+    margin-left: auto;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.add-point__btn {
+  margin-left: 10px;
+  &:active {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,83 @@
+<div class="welcome__wrapper">
+  <div class="project__wrapper">
+    <div class="project__logo">
+      <img src="../../../../assets/img/logo-2.png" alt="project logo" class="project__logo--img">
+      <div class="project__logo--text" l10nTranslate>welcome.mainText</div>
+    </div>
+    <img src="../../../../assets/img/welcome-img-work.png" alt="work" class="project__work">
+  </div>
+  <mat-tab-group mat-align-tabs="center" class="tabs">
+    <mat-tab label="{{ 'welcome.label1' | translate:locale.language }}">
+      <div class="tab tab--opportunities">
+        <img src="../../../../assets/img/advantages-img.png" alt="work" class="project__work">
+        <ul>
+          <li class="tabs__item" l10nTranslate>welcome.advantages1</li>
+          <li class="tabs__item" l10nTranslate>welcome.advantages2</li>
+          <li class="tabs__item" l10nTranslate>welcome.advantages3</li>
+          <li class="tabs__item" l10nTranslate>welcome.advantages4</li>
+        </ul>
+      </div>
+    </mat-tab>
+    <mat-tab label="{{ 'welcome.label2' | translate:locale.language }}">
+      <div class="tab tab--team">
+        <div class="team__card">
+          <img src="../../../../assets/img/av1.png" alt="Vadim Sokolov photo" class="team__avatar">
+          <p class="team__name" l10nTranslate l10nTranslate>welcome.teamMember1Name</p>
+          <p class="team__description" l10nTranslate l10nTranslate>welcome.teamMember1Description
+          </p>
+        </div>
+        <div class="team__card">
+          <img src="../../../../assets/img/av3.png" alt="Valiantsina Yelina photo"
+            class="team__avatar">
+          <p class="team__name" l10nTranslate l10nTranslate>welcome.teamMember2Name</p>
+          <p class="team__description" l10nTranslate l10nTranslate>welcome.teamMember2Description
+          </p>
+        </div>
+        <div class="team__card">
+          <img src="../../../../assets/img/av2.png" alt="Stepan Volkov photo" class="team__avatar">
+          <p class="team__name" l10nTranslate l10nTranslate>welcome.teamMember3Name</p>
+          <p class="team__description" l10nTranslate l10nTranslate>welcome.teamMember3Description
+          </p>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="{{ 'welcome.label3' | translate:locale.language }}">
+      <div class="tab tab--course">
+        <a class="courses_title" l10nTranslate
+          href="https://rs.school/angular/" target="_blank">welcome.courses.mainTitle</a>
+        <div class="courses_title--description" l10nTranslate>welcome.courses.mainDescription</div>
+        <div class="courses__info__wrapper">
+          <div class="courses__info__card">
+            <div class="courses__card__title" l10nTranslate>welcome.courses.cardLearning.title</div>
+            <div class="courses__card__text" l10nTranslate>welcome.courses.cardLearning.description
+            </div>
+          </div>
+          <div class="courses__info__card">
+            <div class="courses__card__title" l10nTranslate>welcome.courses.cardCertificate.title
+            </div>
+            <div class="courses__card__text" l10nTranslate>
+              welcome.courses.cardCertificate.description</div>
+          </div>
+          <div class="courses__info__card">
+            <div class="courses__card__title" l10nTranslate>welcome.courses.cardOpen.title</div>
+            <div class="courses__card__text" l10nTranslate>welcome.courses.cardOpen.description
+            </div>
+          </div>
+          <div class="courses__info__card">
+            <div class="courses__card__title" l10nTranslate>welcome.courses.cardSchedule.title</div>
+            <div class="courses__card__text">
+              <ul>
+                <li class="courses__card__text_li" l10nTranslate>
+                  welcome.courses.cardSchedule.description1</li>
+                <li class="courses__card__text_li" l10nTranslate>
+                  welcome.courses.cardSchedule.description2</li>
+                <li class="courses__card__text_li" l10nTranslate>
+                  welcome.courses.cardSchedule.description3</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

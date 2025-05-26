@@ -1,0 +1,22 @@
+<div class="board-card" (click)="openBoard($event)">
+  <div class="board-card__top">
+    <div class="total-members board-card__total-members">
+      <mat-icon class="total-members__icon">supervised_user_circle</mat-icon>
+      <span class="total-members__number">{{totalMembers}}</span>
+    </div>
+    <div class="board-card__menu">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="deleteBoard()">
+          <mat-icon>delete_outline</mat-icon>
+          <span l10nTranslate>boards.boardDeleteBtn</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+  <div class="board-card__content">
+    <h2 class="board-card__title">{{boardTitle}}</h2>
+  </div>
+</div>

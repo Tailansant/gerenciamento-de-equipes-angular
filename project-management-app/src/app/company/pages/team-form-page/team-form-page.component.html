@@ -1,0 +1,51 @@
+<div class="container">
+    <h2>{{ isEditMode ? 'Editar Equipe' : 'Adicionar Equipe' }}</h2>
+
+    <mat-progress-bar *ngIf="isLoading$ | async" mode="indeterminate"></mat-progress-bar>
+
+    <form [formGroup]="teamForm" (ngSubmit)="onSubmit()" class="team-form">
+        <mat-form-field appearance="fill">
+            <mat-label>Nome da Equipe</mat-label>
+            <input matInput formControlName="name" required>
+            <mat-error *ngIf="teamForm.get('name')?.hasError('required') && teamForm.get('name')?.touched">
+                Nome é obrigatório.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Descrição</mat-label>
+            <textarea matInput formControlName="description" required></textarea>
+            <mat-error
+                *ngIf="teamForm.get('description')?.hasError('required') && teamForm.get('description')?.touched">
+                Descrição é obrigatória.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Projetistas</mat-label>
+            <mat-select formControlName="designerIds" multiple required>
+                <mat-option *ngFor="let designer of (availableDesigners$ | async)" [value]="designer.id">
+                    {{designer.name}} ({{designer.email}})
+                </mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="teamForm.get('designerIds')?.hasError('required') && teamForm.get('designerIds')?.touched">
+                Selecione ao menos um projetista.
+            </mat-error>
+        </mat-form-field>
+
+        <input type="hidden" formControlName="companyId">
+
+        <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit"
+                [disabled]="teamForm.invalid || (isLoading$ | async)">
+                {{ isEditMode ? 'Salvar Alterações' : 'Criar Equipe' }}
+            </button>
+            <button mat-button routerLink="/company/teams">Cancelar</button>
+        </div>
+    </form>
+
+    <div *ngIf="error$ | async as error" class="error-message">
+        Erro: {{ error?.message }}
+    </div>
+</div>

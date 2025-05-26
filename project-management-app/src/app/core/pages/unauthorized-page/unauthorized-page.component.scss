@@ -1,0 +1,18 @@
+.unauthorized-container {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+height: 100vh;
+text-align: center;
+h1 {
+    font-size: 3em;
+    color: #f44336; // Cor de erro
+    margin-bottom: 20px;
+}
+p {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 30px;
+}
+}

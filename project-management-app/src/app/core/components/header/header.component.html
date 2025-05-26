@@ -1,0 +1,74 @@
+<mat-toolbar class="header" color="primary">
+  <span><a routerLink="/" class="logo">Meu App</a></span>
+
+  <span class="spacer"></span>
+
+  <mat-form-field class="header__select">
+    <mat-label>Idioma</mat-label>
+    <select matNativeControl #langs required class="header__lang" (change)="setLocale()">
+      <option value="EN" [selected]="lang === 'EN'">EN</option>
+      <option value="RU" [selected]="lang === 'RU'">RU</option>
+      </select>
+  </mat-form-field>
+
+  <ng-container *ngIf="(isLoggedIn$ | async) && (isBoardsRoute || isSearchRoute)">
+    <form class="search">
+      <mat-form-field class="search__input" appearance="fill">
+        <input type="search" #searchInput matInput placeholder="{{ 'header.taskSearchInputPH' | translate:locale.language }}" (keyup)="search()">
+      </mat-form-field>
+    </form>
+  </ng-container>
+
+  <ng-container *ngIf="(isLoggedIn$ | async) && !isBoardsRoute">
+    <button mat-raised-button color="accent" routerLink="/boards" l10nTranslate>
+      header.btnBoards
+    </button>
+  </ng-container>
+
+  <button mat-button routerLink="/boards">Quadros</button>
+
+  <ng-container *ngIf="isLoggedIn$ | async">
+    <ng-container *appRoleHasPermission="'admin'">
+      <button mat-button [matMenuTriggerFor]="adminMenu">Administração</button>
+      <mat-menu #adminMenu="matMenu">
+        <button mat-menu-item routerLink="/admin/companies">Gerenciar Empresas</button>
+      </mat-menu>
+    </ng-container>
+
+    <ng-container *appRoleHasPermission="'company'">
+      <button mat-button [matMenuTriggerFor]="companyMenu">Empresa</button>
+      <mat-menu #companyMenu="matMenu">
+        <button mat-menu-item routerLink="/company/designers">Gerenciar Projetistas</button>
+        <button mat-menu-item routerLink="/company/teams">Gerenciar Equipes</button>
+      </mat-menu>
+    </ng-container>
+
+    <button mat-button routerLink="/account">Minha Conta</button>
+    <button mat-button class="header__btn--profile"
+        matTooltip="{{ 'header.btnEditTooltip' | translate:locale.language }}"
+        routerLink="/login/profile">
+        <mat-icon>account_circle</mat-icon>
+    </button>
+    <button mat-button class="header__btn--logout"
+        matTooltip="{{ 'header.btnLogOutTooltip' | translate:locale.language }}" (click)="onLogout()">
+        <mat-icon>logout</mat-icon>
+    </button>
+  </ng-container>
+
+  <ng-container *ngIf="!(isLoggedIn$ | async)">
+    <button mat-button class="header__btn--profile"
+        matTooltip="{{ 'header.btnLogInTooltip' | translate:locale.language }}"
+        routerLink="/auth/sign-in">
+        <mat-icon>login</mat-icon>
+    </button>
+    <button mat-button class="header__btn--logout"
+        matTooltip="{{ 'header.btnCreateTooltip' | translate:locale.language }}"
+        routerLink="/auth/sign-up">
+        <mat-icon>add_circle</mat-icon>
+    </button>
+  </ng-container>
+</mat-toolbar>
+
+<div class="loading" *ngIf="isLoad">
+  <mat-spinner></mat-spinner>
+</div>

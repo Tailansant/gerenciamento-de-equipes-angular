@@ -1,0 +1,177 @@
+$marker-color: #77dd77;
+
+.welcome__wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 75vh;
+}
+
+.project__wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.project__logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &--img {
+    margin-top: 10px;
+    width: 30%;
+  }
+
+  &--text {
+    align-self: center;
+    font-size: 1.3rem;
+    padding: 20px;
+    width: 80%;
+    line-height: 2rem;
+    text-align: center;
+    font-weight: 300;
+  }
+}
+
+.project__work {
+  max-width: 40%;
+  align-self: center;
+
+  @media screen and (max-width: 650px) {
+    display: none;
+  }
+}
+
+.tabs__item {
+  margin-top: 10px;
+  font-size: 1.3rem;
+  &::marker {
+    color: $marker-color;
+  }
+
+  @media screen and (max-width: 450px) {
+    font-size: 1.1rem;
+    max-width: 95%;
+  }
+}
+
+.tabs {
+  min-height: 50vh;
+}
+
+.tab {
+  font-weight: 300;
+  line-height: 1.5rem;
+
+  &--opportunities {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &--team {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding-top: 10px;
+  }
+
+  &--course {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.1rem;
+  }
+}
+
+.team {
+  &__card {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+
+    @media screen and (max-width: 650px) {
+      width: 40%;
+      font-size: 1.1rem;
+    }
+
+    @media screen and (max-width: 470px) {
+      width: 80%;
+      font-size: 1.1rem;
+    }
+  }
+
+  &__name {
+    font-weight: 500;
+    font-size: 1.3rem;
+  }
+
+  &__avatar {
+    width: 50%;
+    border-radius: 30%;
+    margin-bottom: 10px;
+  }
+}
+
+.courses__info {
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    justify-content: space-around;
+
+    @media screen and (max-width: 460px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  &__card {
+    width: 40%;
+    margin: 10px;
+
+    @media screen and (max-width: 460px) {
+      width: 95%;
+    }
+  }
+}
+
+.courses {
+  &__btn {
+    background-color: $marker-color;
+    height: 20px;
+    width: 50px;
+  }
+
+  &_title {
+    margin-top: 10px;
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.3rem;
+    line-height: 2rem;
+  }
+}
+
+.courses__card {
+  &__title {
+    text-align: center;
+    color: #535df2;
+  }
+
+  &__text {
+    margin-top: 0.5rem;
+    text-indent: 1rem;
+  }
+
+  &__text_li {
+    &::marker {
+      color: $marker-color;
+    }
+  }
+}

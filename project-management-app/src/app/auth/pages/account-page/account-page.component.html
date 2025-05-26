@@ -1,0 +1,46 @@
+<img src="../../../../assets/img/profile.jpg" alt="profile" class="edit__img">
+<section class="edit__container">
+  <h2 class="edit-profile__title" l10nTranslate>account.title</h2>
+  <form [formGroup]=" editProfileForm" class="edit-profile">
+    <mat-form-field appearance="fill">
+      <mat-label for="name" class="edit-profile__label" l10nTranslate>account.name</mat-label>
+      <input matInput formControlName="name" required class="edit-profile__input">
+      <mat-error *ngIf="editProfileForm.controls['name'].hasError('required')" l10nTranslate>
+        account.nameErrorRequired
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label for="login" class="edit-profile__label" l10nTranslate>account.email</mat-label>
+      <input matInput formControlName="login" required class="edit-profile__input">
+      <mat-error *ngIf="editProfileForm.controls['login'].hasError('required')" l10nTranslate>
+        account.emailErrorRequired
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label for="password" class="edit-profile__label" l10nTranslate>account.password</mat-label>
+      <input [type]="hide ? 'password' : 'text'" matInput formControlName="password"
+        class="edit-profile__input" />
+      <button type="button" mat-icon-button matSuffix (mousedown)="toggleHide()"
+        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" class="hide__btn">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="editProfileForm.controls['password'].hasError('required')" l10nTranslate>
+        account.passwordErrorRequired
+      </mat-error>
+      <mat-error
+        *ngIf="editProfileForm.controls['password'].hasError && !editProfileForm.controls['password'].hasError('required')" l10nTranslate>
+        account.passwordErrors
+      </mat-error>
+    </mat-form-field>
+    <div class="edit-profile__buttons">
+      <button mat-raised-button type="submit" color="primary"
+        class="edit-profile__btn edit-profile__btn--edit"
+        (click)="openConfirmationDialogSave()" l10nTranslate>account.saveBtn</button>
+      <button mat-raised-button type="button" class="edit-profile__btn edit-profile__btn--cancel"
+        (click)="openConfirmationDialogExit()" color="accent" l10nTranslate>account.cancelBtn</button>
+    </div>
+  </form>
+  <button mat-raised-button type="button" class="delete-user"
+    (click)="openConfirmationDialogDelete()" color="warn" l10nTranslate>account.deleteBtn</button>
+</section>

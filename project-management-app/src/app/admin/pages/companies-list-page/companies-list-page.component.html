@@ -1,0 +1,54 @@
+<div class="container">
+    <h2>Gerenciar Empresas</h2>
+
+    <div class="actions">
+        <button mat-raised-button color="primary" (click)="onCreateCompany()">
+            <mat-icon>add</mat-icon> Adicionar Empresa
+        </button>
+    </div>
+
+    <mat-progress-bar *ngIf="isLoading$ | async" mode="indeterminate"></mat-progress-bar>
+
+    <div *ngIf="(companies$ | async) as companies">
+        <div *ngIf="companies.length === 0 && !(isLoading$ | async)">
+            <p>Nenhuma empresa encontrada.</p>
+        </div>
+
+        <table mat-table [dataSource]="companies" class="mat-elevation-z8" *ngIf="companies.length > 0">
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Nome </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="cnpj">
+                <th mat-header-cell *matHeaderCellDef> CNPJ </th>
+                <td mat-cell *matCellDef="let element"> {{element.cnpj}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="address">
+                <th mat-header-cell *matHeaderCellDef> Endereço </th>
+                <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Ações </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button color="accent" (click)="onEditCompany(element.id)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="onDeleteCompany(element.id)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+
+    <div *ngIf="error$ | async as error" class="error-message">
+        Erro: {{ error?.message }}
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="boards-page">
+  <app-board-card [boardId]="board._id" [boardTitle]="board.title"
+    [totalMembers]="board.users.length + owner" *ngFor="let board of boards"
+    (boardAction)="handleBoardAction($event)"></app-board-card>
+  <button mat-stroked-button color="accent" class="boards-page__btn--new-board"
+    (click)="openCreateBoard()" l10nTranslate>
+    boards.createBoardBtn
+  </button>
+</div>

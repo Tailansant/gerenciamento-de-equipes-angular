@@ -1,0 +1,49 @@
+<div class="container">
+    <h2>{{ isEditMode ? 'Editar Projetista' : 'Adicionar Projetista' }}</h2>
+
+    <mat-progress-bar *ngIf="isLoading$ | async" mode="indeterminate"></mat-progress-bar>
+
+    <form [formGroup]="designerForm" (ngSubmit)="onSubmit()" class="designer-form">
+        <mat-form-field appearance="fill">
+            <mat-label>Nome do Projetista</mat-label>
+            <input matInput formControlName="name" required>
+            <mat-error *ngIf="designerForm.get('name')?.hasError('required') && designerForm.get('name')?.touched">
+                Nome é obrigatório.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email" required>
+            <mat-error *ngIf="designerForm.get('email')?.hasError('required') && designerForm.get('email')?.touched">
+                Email é obrigatório.
+            </mat-error>
+            <mat-error *ngIf="designerForm.get('email')?.hasError('email') && designerForm.get('email')?.touched">
+                Formato de email inválido.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Especialidade</mat-label>
+            <input matInput formControlName="specialty" required>
+            <mat-error
+                *ngIf="designerForm.get('specialty')?.hasError('required') && designerForm.get('specialty')?.touched">
+                Especialidade é obrigatória.
+            </mat-error>
+        </mat-form-field>
+
+        <input type="hidden" formControlName="companyId">
+
+        <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit"
+                [disabled]="designerForm.invalid || (isLoading$ | async)">
+                {{ isEditMode ? 'Salvar Alterações' : 'Criar Projetista' }}
+            </button>
+            <button mat-button routerLink="/company/designers">Cancelar</button>
+        </div>
+    </form>
+
+    <div *ngIf="error$ | async as error" class="error-message">
+        Erro: {{ error?.message }}
+    </div>
+</div>

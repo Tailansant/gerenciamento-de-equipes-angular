@@ -1,0 +1,36 @@
+.boards-page {
+  min-height: 82vh;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  box-sizing: border-box;
+  align-content: flex-start;
+  justify-content: space-between;
+
+  @media screen and (max-width: 480px) {
+    justify-content: center;
+  }
+
+  &__btn--new-board {
+    font-size: 1.7rem;
+    width: 23%;
+    height: 150px;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-right: auto;
+
+    @media screen and (max-width: 930px) {
+      width: 30%;
+    }
+
+    @media screen and (max-width: 750px) {
+      width: 47%;
+    }
+
+    @media screen and (max-width: 480px) {
+      width: 80%;
+      margin-right: 0;
+    }
+  }
+}

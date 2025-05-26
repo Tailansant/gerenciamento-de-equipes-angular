@@ -1,0 +1,29 @@
+<div class="board">
+  <div class="board__draggable" *ngIf="board">
+    <smooth-dnd-container [orientation]="'horizontal'" (drop)="onColumnDrop($event)"
+      [dragHandleSelector]="'.column-drag-handle'">
+      <smooth-dnd-draggable *ngFor="let column of board.columns">
+        <div class="board__column">
+          <div class="card-column-header">
+            <span class="column-drag-handle" title="{{ 'boards.columnMoveHint' | translate:locale.language }}">&#8596;</span>
+          </div>
+
+          <app-column [columnData]="column">
+            <smooth-dnd-container [groupName]="'col'" (drop)="onCardDrop(column._id, $event)"
+              [getChildPayload]="getCardPayload(column._id)" [dragClass]="'card-ghost'"
+              [dropClass]="'card-ghost-drop'">
+              <smooth-dnd-draggable *ngFor="let task of column.tasks">
+                <div class="board__task">
+                  <app-task [taskData]="task"></app-task>
+                </div>
+              </smooth-dnd-draggable>
+            </smooth-dnd-container>
+          </app-column>
+        </div>
+      </smooth-dnd-draggable>
+    </smooth-dnd-container>
+  </div>
+  <button mat-button class="board__btn--add" (click)="openCreateDialog()" l10nTranslate>
+    <mat-icon>add</mat-icon> boards.createColumnBtn
+  </button>
+</div>

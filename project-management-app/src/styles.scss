@@ -1,0 +1,61 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  height: 0 !important;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-wrapper {
+  padding-bottom: 10px !important;
+}
+
+.mat-toolbar.mat-primary {
+  background-color: #535df2;
+}
+
+.mat-tab-header {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  width: fit-content;
+  max-width: 95%;
+  margin: 0 auto;
+}
+
+.mat-tab-label-content {
+  color: #8d1b00;
+  font-size: 1.3rem;
+  @media screen and (max-width: 950px) {
+    font-size: 1rem;
+  }
+}
+
+.mat-chip-list-wrapper {
+  overflow: auto;
+}
+
+::-webkit-scrollbar-thumb{
+  margin-right:5px;
+  background-color:#999999;
+  border-radius:5px;
+}
+::-webkit-scrollbar{
+  opacity:0.7;
+  width:10px;
+  height:10px;
+  background-color:#CCCCCC;
+  padding:5px;
+  border-radius:10px;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

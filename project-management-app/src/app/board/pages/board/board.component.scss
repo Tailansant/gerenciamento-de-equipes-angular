@@ -1,0 +1,52 @@
+.board {
+  box-sizing: border-box;
+  height: 80vh;
+  margin: 1vh auto;
+  padding: 13px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0 0 0 3px;
+  border-radius: 10px;
+  overflow-x: auto;
+  width: 95vw;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+
+  &__btn--add {
+    min-width: max-content;
+  }
+}
+
+smooth-dnd-container {
+  min-width: 250px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background-color: lightgray;
+}
+
+.board__column {
+  margin-right: 10px;
+}
+
+.board__task {
+  margin-bottom: 10px;
+}
+
+.column-drag-handle {
+  font-size: 30px;
+  transition: 0.3s all ease;
+  &:hover {
+    cursor: pointer;
+    color: blue;
+  }
+}
+
+.card-column-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.smooth-dnd-container {
+  min-height: 60%;
+}

@@ -1,0 +1,23 @@
+.not__found__wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  font-size: 1.5rem;
+  height: 82vh;
+  @media screen and (max-width: 770px) {
+    height: 60vh;
+  }
+}
+
+.not__found__text {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.not__found__img {
+  display: block;
+  margin: 0 auto;
+  padding: 50px 0;
+  @media screen and (max-width: 770px) {
+    width: 80vw;
+  }
+}

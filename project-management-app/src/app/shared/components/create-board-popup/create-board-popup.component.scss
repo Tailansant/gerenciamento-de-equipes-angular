@@ -1,0 +1,13 @@
+.create-board {
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.error__user-status {
+  font-size: 11px;
+  position: relative;
+  top: -12px;
+  left: 11px;
+}

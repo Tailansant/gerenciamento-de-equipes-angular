@@ -1,0 +1,46 @@
+<div class="container">
+    <h2>{{ isEditMode ? 'Editar Empresa' : 'Adicionar Empresa' }}</h2>
+
+    <mat-progress-bar *ngIf="isLoading$ | async" mode="indeterminate"></mat-progress-bar>
+
+    <form [formGroup]="companyForm" (ngSubmit)="onSubmit()" class="company-form">
+        <mat-form-field appearance="fill">
+            <mat-label>Nome da Empresa</mat-label>
+            <input matInput formControlName="name" required>
+            <mat-error *ngIf="companyForm.get('name')?.hasError('required') && companyForm.get('name')?.touched">
+                Nome é obrigatório.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>CNPJ</mat-label>
+            <input matInput formControlName="cnpj" placeholder="XX.XXX.XXX/XXXX-XX" required>
+            <mat-error *ngIf="companyForm.get('cnpj')?.hasError('required') && companyForm.get('cnpj')?.touched">
+                CNPJ é obrigatório.
+            </mat-error>
+            <mat-error *ngIf="companyForm.get('cnpj')?.hasError('pattern') && companyForm.get('cnpj')?.touched">
+                Formato de CNPJ inválido.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Endereço</mat-label>
+            <textarea matInput formControlName="address" required></textarea>
+            <mat-error *ngIf="companyForm.get('address')?.hasError('required') && companyForm.get('address')?.touched">
+                Endereço é obrigatório.
+            </mat-error>
+        </mat-form-field>
+
+        <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit"
+                [disabled]="companyForm.invalid || (isLoading$ | async)">
+                {{ isEditMode ? 'Salvar Alterações' : 'Criar Empresa' }}
+            </button>
+            <button mat-button routerLink="/admin/companies">Cancelar</button>
+        </div>
+    </form>
+
+    <div *ngIf="error$ | async as error" class="error-message">
+        Erro: {{ error?.message }}
+    </div>
+</div>
