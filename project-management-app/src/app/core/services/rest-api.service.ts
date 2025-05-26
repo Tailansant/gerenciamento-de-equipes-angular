@@ -1,52 +1,38 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Endpoints, getBaseEndpoint, getEndpointWithId } from '../enums/endpoints'; // Caminho para o seu arquivo de Endpoints
-import { UserCredentials } from '../../auth/models/user-credentials.model'; // Caminho para UserCredentials
+import { Endpoints, getBaseEndpoint, getEndpointWithId } from '../enums/endpoints';
+import { UserCredentials } from '../../auth/models/user-credentials.model';
 import {
   BoardResponse,
   ColumnResponse,
   TaskResponse,
   UserResponse,
   PointsResponse,
-} from '../models/response-api.models'; // Caminho para os modelos de resposta
-import { Board } from '../models/board.models'; // Caminho para Board
-import { Column, PartialColumnWithOrder } from '../models/column.model'; // Caminho para Column
-import { PartialTaskWithOrder, Task, TaskWithColumnId } from '../models/task.models'; // Caminho para Task
+} from '../models/response-api.models';
+import { Board } from '../models/board.models';
+import { Column, PartialColumnWithOrder } from '../models/column.model';
+import { PartialTaskWithOrder, Task, TaskWithColumnId } from '../models/task.models';
 
-// Modelos para as novas entidades
-import { Company } from '../models/company.model'; // Caminho para Company
-import { Designer } from '../models/designer.model'; // Caminho para Designer
-import { Team } from '../models/team.model'; // Caminho para Team
-
-// Se HTTP_OPTIONS for uma constante global, certifique-se de que ela esteja acessível.
-// Caso contrário, você pode embuti-la ou passá-la como um argumento.
-// Por exemplo:
-// import { HTTP_OPTIONS } from '../constants/constants';
-
+import { Company } from '../models/company.model';
+import { Designer } from '../models/designer.model';
+import { Team } from '../models/team.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RestApiService {
-  // private apiUrl = environment.apiUrl; // Não é mais necessário, pois getBaseEndpoint/getEndpointWithId já usam
 
   constructor(private http: HttpClient) {}
 
-  // **Métodos HTTP genéricos (melhorados para incluir HTTP_OPTIONS)**
   private getOptions(): { headers?: HttpHeaders } {
-    // Retorna suas opções HTTP padrão, como headers de autorização se você tiver um interceptor,
-    // ou Content-Type. Se você tem um HTTP_OPTIONS importado, use-o aqui.
-    // Exemplo:
-    // return HTTP_OPTIONS;
-    // Se não tiver, pode ser um objeto vazio ou com headers básicos:
     return {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
     };
   }
-
 
   get<T>(endpoint: Endpoints, id?: string, queryParams?: { [key: string]: string }): Observable<T> {
     const url = id ? getEndpointWithId(endpoint, id) : getBaseEndpoint(endpoint);
@@ -69,8 +55,6 @@ export class RestApiService {
   delete<T>(endpoint: Endpoints, id: string): Observable<T> {
     return this.http.delete<T>(getEndpointWithId(endpoint, id), this.getOptions());
   }
-
-  // --- Métodos CRUD específicos para Auth, Users, Boards, Columns, Tasks, Points ---
 
   signIn(credentials: Pick<UserCredentials, 'login' | 'password'>): Observable<{ token: string }> {
     return this.post<{ token: string }>(credentials, Endpoints.AUTH_SIGN_IN);
@@ -117,46 +101,27 @@ export class RestApiService {
   }
 
   getBoardsByUserId(id: string): Observable<Array<BoardResponse>> {
-    // Assumindo que este endpoint não precisa de /:id, mas sim de um param de query user id
     return this.get<Array<BoardResponse>>(Endpoints.BOARDS_SET, undefined, { userId: id });
   }
 
   getColumns(boardId: string): Observable<Array<ColumnResponse>> {
-    // Isso requer uma URL complexa: /boards/{boardId}/columns
-    // Se seu backend não tem um endpoint específico para isso,
-    // vamos precisar construí-lo manualmente ou ajustar o Endpoints.
-    // Opção 1: Deixar como estava (funcional mas menos "genérico")
-    // return this.http.get<Array<ColumnResponse>>(`${getBaseEndpoint(Endpoints.BOARDS)}/${boardId}${getBaseEndpoint(Endpoints.COLUMN)}`, this.getOptions());
-    // Opção 2: Se o backend permite /columns?boardId=...
     return this.get<Array<ColumnResponse>>(Endpoints.COLUMN, undefined, { boardId: boardId });
   }
 
   createColumn(column: Column, boardId: string): Observable<ColumnResponse> {
-    // Opção 1: Deixar como estava
-    // return this.http.post<ColumnResponse>(`${getBaseEndpoint(Endpoints.BOARDS)}/${boardId}${getBaseEndpoint(Endpoints.COLUMN)}`, column, this.getOptions());
-    // Opção 2: Se o backend permite /columns?boardId=...
-    return this.post<ColumnResponse>(column, Endpoints.COLUMN); // Presumindo que 'column' já inclui o boardId, ou que é um header/body implícito
+    return this.post<ColumnResponse>(column, Endpoints.COLUMN);
   }
 
   getColumnById(id: string, boardId: string): Observable<ColumnResponse> {
-    // Opção 1: Deixar como estava
-    // return this.http.get<ColumnResponse>(`${getBaseEndpoint(Endpoints.BOARDS)}/${boardId}${getBaseEndpoint(Endpoints.COLUMN)}/${id}`, this.getOptions());
-    // Opção 2: Se o backend permite /columns/{id}?boardId=... ou se o :id funciona para column
     return this.get<ColumnResponse>(Endpoints.COLUMN, id, { boardId: boardId });
   }
 
   updateColumnById(column: Column, id: string, boardId: string): Observable<ColumnResponse> {
-    // Opção 1: Deixar como estava
-    // return this.http.put<ColumnResponse>(`${getBaseEndpoint(Endpoints.BOARDS)}/${boardId}${getBaseEndpoint(Endpoints.COLUMN)}/${id}`, column, this.getOptions());
-    // Opção 2:
-    return this.put<ColumnResponse>(column, Endpoints.COLUMN, id); // Presumindo que 'column' já inclui o boardId, ou que é um header/body implícito
+    return this.put<ColumnResponse>(column, Endpoints.COLUMN, id);
   }
 
   deleteColumnById(id: string, boardId: string): Observable<ColumnResponse> {
-    // Opção 1: Deixar como estava
-    // return this.http.delete<ColumnResponse>(`${getBaseEndpoint(Endpoints.BOARDS)}/${boardId}${getBaseEndpoint(Endpoints.COLUMN)}/${id}`, this.getOptions());
-    // Opção 2:
-    return this.delete<ColumnResponse>(Endpoints.COLUMN, id); // Se a exclusão não depende do boardId na URL
+    return this.delete<ColumnResponse>(Endpoints.COLUMN, id);
   }
 
   getColumnsByIds(ids: Array<string>): Observable<Array<ColumnResponse>> {
@@ -168,7 +133,7 @@ export class RestApiService {
   }
 
   updateOrderColumns(columns: Array<PartialColumnWithOrder>): Observable<Array<ColumnResponse>> {
-    return this.patch<Array<ColumnResponse>>(columns, Endpoints.COLUMNS_SET); // Usando patch
+    return this.patch<Array<ColumnResponse>>(columns, Endpoints.COLUMNS_SET);
   }
 
   createColumns(columns: Array<Required<Column>>): Observable<Array<ColumnResponse>> {
@@ -176,10 +141,6 @@ export class RestApiService {
   }
 
   getTasks(boardId: string, columnId: string): Observable<Array<TaskResponse>> {
-    // Isso também requer uma URL complexa: /boards/{boardId}/columns/{columnId}/tasks
-    // Aqui, a abordagem de query params é mais complicada. O ideal é ter endpoints mais flat ou
-    // construir a URL explicitamente para esses casos aninhados.
-    // Mantendo a construção manual para clareza em casos aninhados.
     return this.http.get<Array<TaskResponse>>(
       `${getBaseEndpoint(Endpoints.BOARDS)}/${boardId}${getBaseEndpoint(Endpoints.COLUMN)}/${columnId}${getBaseEndpoint(Endpoints.TASK)}`,
       this.getOptions()
@@ -238,13 +199,11 @@ export class RestApiService {
   }
 
   getTasksByBoardId(id: string): Observable<Array<TaskResponse>> {
-    // Isso pode ser ajustado para usar get(Endpoints.TASKS_SET, undefined, { boardId: id })
-    // se o backend aceitar. Mantenho a construção manual por enquanto.
     return this.get<Array<TaskResponse>>(Endpoints.TASKS_SET, undefined, { boardId: id });
   }
 
   getPointsByTaskId(id: string): Observable<Array<PointsResponse>> {
-    return this.get<Array<PointsResponse>>(Endpoints.POINTS, id); // Assumindo /points/:id
+    return this.get<Array<PointsResponse>>(Endpoints.POINTS, id);
   }
 
   createPoint(point: Omit<PointsResponse, '_id'>): Observable<PointsResponse> {
@@ -255,16 +214,13 @@ export class RestApiService {
     point: Pick<PointsResponse, 'title' | 'done'>,
     id: string,
   ): Observable<PointsResponse> {
-    return this.patch<PointsResponse>(point, Endpoints.POINTS, id); // Usando patch
+    return this.patch<PointsResponse>(point, Endpoints.POINTS, id);
   }
 
   deletePointsById(id: string): Observable<PointsResponse> {
     return this.delete<PointsResponse>(Endpoints.POINTS, id);
   }
 
-  // --- Métodos CRUD específicos para as novas entidades (já estavam no seu primeiro código) ---
-
-  // Companies (RF01)
   createCompany(company: Company): Observable<Company> {
     return this.post<Company>(company, Endpoints.COMPANIES);
   }
@@ -274,7 +230,7 @@ export class RestApiService {
   }
 
   getCompanyById(id: string): Observable<Company> {
-    return this.get<Company>(Endpoints.COMPANIES, id); // Usando getEndpointWithId
+    return this.get<Company>(Endpoints.COMPANIES, id);
   }
 
   updateCompany(id: string, company: Company): Observable<Company> {
@@ -285,13 +241,11 @@ export class RestApiService {
     return this.delete<void>(Endpoints.COMPANIES, id);
   }
 
-  // Designers (RF02)
   createDesigner(designer: Designer): Observable<Designer> {
     return this.post<Designer>(designer, Endpoints.DESIGNERS);
   }
 
   getDesigners(companyId?: string): Observable<Designer[]> {
-    // Adaptação para query params se seu backend usa ?companyId=
     return this.get<Designer[]>(Endpoints.DESIGNERS, undefined, companyId ? { companyId } : undefined);
   }
 
@@ -307,13 +261,11 @@ export class RestApiService {
     return this.delete<void>(Endpoints.DESIGNERS, id);
   }
 
-  // Teams (RF03)
   createTeam(team: Team): Observable<Team> {
     return this.post<Team>(team, Endpoints.TEAMS);
   }
 
   getTeams(companyId?: string): Observable<Team[]> {
-    // Adaptação para query params se seu backend usa ?companyId=
     return this.get<Team[]>(Endpoints.TEAMS, undefined, companyId ? { companyId } : undefined);
   }
 

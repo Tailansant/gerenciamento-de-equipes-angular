@@ -31,7 +31,7 @@ export class DesignersListPageComponent implements OnInit {
     ngOnInit(): void {
         this.store.select(AuthSelectors.selectUserCompanyId)
             .pipe(
-                filter(companyId => !!companyId), // Garante que companyId não é nulo
+                filter(companyId => !!companyId), 
                 tap(companyId => {
                     this.userCompanyId = companyId;
                     this.store.dispatch(DesignersActions.loadDesigners({ companyId: this.userCompanyId }));

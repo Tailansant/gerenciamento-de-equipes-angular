@@ -1,11 +1,11 @@
 import { User } from 'src/app/core/models/user.model'; 
 
 export interface AuthState {
-  isAuthenticated: boolean; // Indica se o usuário está autenticado
-  user: User | null; // Objeto User completo, que deve incluir id, name, login e role
-  token: string | null; // Token de autenticação
-  errorMessage: string | null; // Mensagens de erro relacionadas à autenticação
-  loading: boolean; // Indicador de carregamento para operações de autenticação
+  isAuthenticated: boolean; 
+  user: User | null;
+  token: string | null; 
+  errorMessage: string | null; 
+  loading: boolean; 
 }
 
 export const initialState: AuthState = {

@@ -10,7 +10,7 @@ export enum ItemType {
 }
 
 export interface ConfirmData {
-  message?: string; // custom message
-  id?: string; // id of item to delete
+  message?: string; 
+  id?: string; 
   itemType?: ItemType;
 }

@@ -4,6 +4,7 @@ import { Designer } from '../../core/models/designer.model';
 export const loadDesigners = createAction(
 '[Designers API] Load Designers',
   props<{ companyId?: string }>() 
+);
 
 export const loadDesignersSuccess = createAction(
 '[Designers API] Load Designers Success',

@@ -4,7 +4,7 @@ import { tap } from 'rxjs/operators';
 import { LocalStorageService } from './local-storage.service';
 import { RestApiService } from './rest-api.service';
 import { User } from '../models/user.model';
-import { UserCredentials } from 'src/app/auth/models/user-credentials.model'; // Assumindo que você tem isso
+import { UserCredentials } from 'src/app/auth/models/user-credentials.model'; 
 
 @Injectable({
 providedIn: 'root'

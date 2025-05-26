@@ -5,8 +5,8 @@ import { Team } from 'src/app/core/models/team.model';
 import * as TeamsActions from 'src/app/store/actions/teams.actions';
 import * as TeamsSelectors from 'src/app/store/selectors/teams.selectors';
 import * as AuthSelectors from 'src/app/store/selectors/auth.selectors';
-import * as DesignersActions from 'src/app/store/actions/designers.actions'; // Para carregar designers e mostrar nomes
-import * as DesignersSelectors from 'src/app/store/selectors/designers.selectors'; // Para obter designers
+import * as DesignersActions from 'src/app/store/actions/designers.actions'; 
+import * as DesignersSelectors from 'src/app/store/selectors/designers.selectors';
 
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmPopupComponent } from 'src/app/shared/components/confirm-popup/confirm-popup.component';
@@ -25,7 +25,7 @@ export class TeamsListPageComponent implements OnInit {
     error$: Observable<any>;
     displayedColumns: string[] = ['name', 'description', 'designers', 'actions'];
     private userCompanyId: string | null = null;
-    allDesigners: Designer[] = []; // Para mapear IDs de projetistas para nomes
+    allDesigners: Designer[] = []; 
 
     constructor(private store: Store, private dialog: MatDialog, private router: Router) {
         this.teams$ = this.store.select(TeamsSelectors.selectAllTeams);
@@ -44,7 +44,7 @@ export class TeamsListPageComponent implements OnInit {
                 tap(companyId => {
                     this.userCompanyId = companyId;
                     this.store.dispatch(TeamsActions.loadTeams({ companyId: this.userCompanyId }));
-                    this.store.dispatch(DesignersActions.loadDesigners({ companyId: this.userCompanyId })); // Carrega designers para a lista
+                    this.store.dispatch(DesignersActions.loadDesigners({ companyId: this.userCompanyId })); 
                 })
             ).subscribe();
     }

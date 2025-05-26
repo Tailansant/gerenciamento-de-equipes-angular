@@ -20,7 +20,7 @@ canActivate(
         if (role === UserRole.ADMIN) {
         return true;
         } else {
-          this.router.navigate(['/unauthorized']); // Redireciona para página de acesso negado
+          this.router.navigate(['/unauthorized']); 
         return false;
         }
     })

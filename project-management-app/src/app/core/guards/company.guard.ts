@@ -17,10 +17,10 @@ canActivate(
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.store.select(AuthSelectors.selectUserRole).pipe(
     map(role => {
-        if (role === UserRole.COMPANY || role === UserRole.ADMIN) { // Administrador também pode gerenciar
+        if (role === UserRole.COMPANY || role === UserRole.ADMIN) { 
         return true;
         } else {
-          this.router.navigate(['/unauthorized']); // Redireciona para página de acesso negado
+          this.router.navigate(['/unauthorized']); 
         return false;
         }
     })

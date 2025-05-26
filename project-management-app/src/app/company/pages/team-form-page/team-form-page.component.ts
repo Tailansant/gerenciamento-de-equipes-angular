@@ -23,7 +23,7 @@ export class TeamFormPageComponent implements OnInit, OnDestroy {
     teamId: string | null = null;
     isLoading$: Observable<boolean>;
     error$: Observable<any>;
-    availableDesigners$: Observable<Designer[]>; // Projetistas disponíveis para seleção
+    availableDesigners$: Observable<Designer[]>; 
     private userCompanyId: string | null = null;
     private sub: Subscription | null = null;
 
@@ -44,7 +44,6 @@ export class TeamFormPageComponent implements OnInit, OnDestroy {
 
         this.initForm();
 
-        // Carrega os designers disponíveis para a empresa do usuário logado
         this.store.select(AuthSelectors.selectUserCompanyId)
             .pipe(
                 filter(companyId => !!companyId),
@@ -53,7 +52,6 @@ export class TeamFormPageComponent implements OnInit, OnDestroy {
                 this.userCompanyId = companyId;
                 this.store.dispatch(DesignersActions.loadDesigners({ companyId: this.userCompanyId }));
 
-                // Se estiver criando, preenche o companyId da equipe automaticamente
                 if (!this.isEditMode) {
                     this.teamForm.patchValue({ companyId: this.userCompanyId });
                 }
@@ -66,9 +64,9 @@ export class TeamFormPageComponent implements OnInit, OnDestroy {
                 this.store.select(AuthSelectors.selectUserCompanyId)
             ])
                 .pipe(
-                    filter(([teams, companyId]) => !!companyId), // Garante que companyId existe
+                    filter(([teams, companyId]) => !!companyId), 
                     map(([teams, companyId]) => {
-                        this.userCompanyId = companyId; // Garante que companyId está disponível
+                        this.userCompanyId = companyId; 
                         return teams.find(t => t.id === this.teamId);
                     }),
                     take(1)
@@ -76,7 +74,6 @@ export class TeamFormPageComponent implements OnInit, OnDestroy {
                 .subscribe(team => {
                     if (team) {
                         this.teamForm.patchValue(team);
-                        // Certifique-se de que o valor de designerIds é um array de strings para o select
                         this.teamForm.get('designerIds')?.patchValue(team.designerIds || []);
                     } else {
                         console.warn('Equipe não encontrada para edição:', this.teamId);
@@ -92,7 +89,7 @@ export class TeamFormPageComponent implements OnInit, OnDestroy {
             name: ['', Validators.required],
             description: ['', Validators.required],
             companyId: ['', Validators.required],
-            designerIds: [[] as string[], Validators.required] // Array de IDs de projetistas
+            designerIds: [[] as string[], Validators.required] 
         });
     }
 

@@ -13,57 +13,57 @@ export const selectIsAuthenticated = createSelector(
 
 export const selectAuthLoading = createSelector(
   selectAuthState,
-  (state: AuthState) => state.loading // Retorna o status de carregamento
+  (state: AuthState) => state.loading
 );
 
 export const selectAuthError = createSelector(
   selectAuthState,
-  (state: AuthState) => state.errorMessage // Retorna a mensagem de erro
+  (state: AuthState) => state.errorMessage 
 );
 
 export const selectCurrentUser = createSelector(
   selectAuthState,
-  (state: AuthState) => state.user // Retorna o objeto User completo
+  (state: AuthState) => state.user
 );
 
 export const selectAuthToken = createSelector(
   selectAuthState,
-  (state: AuthState) => state.token // Retorna o token de autenticação
+  (state: AuthState) => state.token 
 );
 
 export const selectCurrentUserId = createSelector(
   selectCurrentUser,
-  (user) => user ? user.id : null // Retorna o ID do usuário, se houver
+  (user) => user ? user.id : null
 );
 
 export const selectUserLogin = createSelector(
   selectCurrentUser,
-  (user) => user ? user.login : null // Retorna o login do usuário, se houver
+  (user) => user ? user.login : null 
 );
 
 export const selectUserName = createSelector(
   selectCurrentUser,
-  (user) => user ? user.name : null // Retorna o nome do usuário, se houver
+  (user) => user ? user.name : null
 );
 
 export const selectUserRole = createSelector(
   selectCurrentUser,
-  (user) => user ? user.role : null // Retorna o papel do usuário, se houver
+  (user) => user ? user.role : null 
 );
 
 export const selectUserCompanyId = createSelector(
   selectCurrentUser,
-  (user) => user ? user.companyId : null // Retorna o companyId do usuário, se houver
+  (user) => user ? user.companyId : null
 );
 
 export const selectIsAdmin = createSelector(
   selectUserRole,
-  (role) => role === UserRole.ADMIN // Verifica se o papel é ADMIN
+  (role) => role === UserRole.ADMIN 
 );
 
 export const selectIsCompany = createSelector(
   selectUserRole,
-  (role) => role === UserRole.COMPANY // Verifica se o papel é COMPANY
+  (role) => role === UserRole.COMPANY 
 );
 
 export const selectIsDesigner = createSelector(

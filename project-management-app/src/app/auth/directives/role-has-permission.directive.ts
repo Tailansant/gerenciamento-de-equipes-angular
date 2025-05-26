@@ -2,7 +2,7 @@ import { Directive, Input, TemplateRef, ViewContainerRef, OnInit, OnDestroy } fr
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as AuthSelectors from '../../store/selectors/auth.selectors';
-import { UserRole } from '../../core/enums/user-role.enum'; // Importar o enum de papéis
+import { UserRole } from '../../core/enums/user-role.enum'; 
 
 @Directive({
 selector: '[appRoleHasPermission]'
@@ -31,10 +31,6 @@ private updateView(userRole: UserRole | null): void {
 }
 
 private checkPermission(currentUserRole: UserRole, requiredRole: UserRole): boolean {
-    // Lógica de permissão:
-    // Admin pode fazer tudo
-    // Empresa pode fazer o que é de Empresa
-    // Projetista pode fazer o que é de Projetista
     if (currentUserRole === UserRole.ADMIN) {
     return true;
     }
