@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: '', component: NotFoundPageComponent },
 ];
 
-@NgModule({
+export @NgModule({
   declarations: [SignInPageComponent, SignUpPageComponent, AccountPageComponent],
   imports: [
     CommonModule,

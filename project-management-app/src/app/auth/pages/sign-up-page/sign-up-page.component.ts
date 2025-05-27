@@ -79,7 +79,7 @@ export class SignUpPageComponent {
   submit() {
     const payload = { ...this.signUpForm.value };
     delete payload.repeatPassword;
-    this.store.dispatch(signUp({ payload }));
+    this.store.dispatch(signUp({ credentials: payload }));
   }
 
   toggleHide() {

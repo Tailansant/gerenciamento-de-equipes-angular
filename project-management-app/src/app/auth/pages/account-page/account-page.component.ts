@@ -43,8 +43,8 @@ export class AccountPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.editProfileForm.setValue({
-      name: this.userData.name || '',
-      login: this.userData.login || '',
+      name: (this.userData as any).name || '',
+      login: (this.userData as any).login || '',
       password: '',
     });
   }
@@ -63,8 +63,8 @@ export class AccountPageComponent implements OnInit {
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.editProfileForm.setValue({
-          name: this.userData.name,
-          login: this.userData.login,
+          name: (this.userData as any).name || '',
+          login: (this.userData as any).login || '',
           password: '',
         });
       }
@@ -117,10 +117,10 @@ export class AccountPageComponent implements OnInit {
       login: this.editProfileForm.value.login,
       password: this.editProfileForm.value.password,
     };
-    this.store.dispatch(updateUserData({ payload: { credentials, id: this.userData.id || '' } }));
+    this.store.dispatch(updateUserData({ credentials, id: (this.userData as any).id || '' }));
   }
 
   deleteUser() {
-    this.store.dispatch(deleteUser({ payload: { id: this.userData.id as string } }));
+    this.store.dispatch(deleteUser({ id: (this.userData as any).id as string }));
   }
 }

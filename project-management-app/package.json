@@ -25,6 +25,7 @@
     "@ngrx/store": "^14.3.2",
     "@ngrx/store-devtools": "^14.3.2",
     "angular-l10n": "^14.0.0",
+    "app": "^0.1.0",
     "ngx-smooth-dnd": "0.4.1",
     "rxjs": "~7.5.0",
     "zone.js": "~0.11.4"

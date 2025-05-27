@@ -4,7 +4,8 @@ import { tap } from 'rxjs/operators';
 import { LocalStorageService } from './local-storage.service';
 import { RestApiService } from './rest-api.service';
 import { User } from '../models/user.model';
-import { UserCredentials } from 'src/app/auth/models/user-credentials.model'; 
+import { UserCredentials } from 'src/app/auth/models/user-credentials.model';
+import {Endpoints} from "../enums/endpoints";
 
 @Injectable({
 providedIn: 'root'
@@ -26,15 +27,15 @@ public get currentUserValue(): User | null {
     return this.currentUserSubject.value;
 }
 
-signIn(credentials: UserCredentials): Observable<any> {
-    return this.restApiService.post(credentials, Endpoints.AUTH_SIGN_IN).pipe(
-    tap((response: { token: string, user: User }) => {
+  signIn(credentials: UserCredentials): Observable<{ token: string; user: User }> {
+    return this.restApiService.post<{ token: string; user: User }>(credentials, Endpoints.AUTH_SIGN_IN).pipe(
+      tap((response: { token: string, user: User }) => {
         this.localStorageService.setItem('authToken', response.token);
         this.localStorageService.setItem('currentUser', JSON.stringify(response.user));
         this.currentUserSubject.next(response.user);
-    })
+      })
     );
-}
+  }
 
 signUp(user: UserCredentials): Observable<any> {
     return this.restApiService.post(user, Endpoints.AUTH_SIGN_UP);

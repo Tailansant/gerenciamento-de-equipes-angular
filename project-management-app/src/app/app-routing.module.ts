@@ -2,9 +2,6 @@ import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -12,7 +9,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { AuthModule } from './auth/auth.module';
 import { BoardModule } from './board/board.module';
 import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './admin/admin.module';
@@ -34,6 +30,9 @@ import { SearchEffects } from './store/effects/search.effects';
 import { CompaniesEffects } from './store/effects/companies.effects';
 import { DesignersEffects } from './store/effects/designers.effects';
 import { TeamsEffects } from './store/effects/teams.effects';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects/src/effects_module';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools/src/instrument';
 
 
 
@@ -45,18 +44,17 @@ import { TeamsEffects } from './store/effects/teams.effects';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule, 
+    HttpClientModule,
     DragDropModule,
     MatDialogModule,
     MatSnackBarModule,
-    CoreModule,      .
-    AuthModule,      
-    BoardModule,    
-    SharedModule,    
-    AdminModule,    
-    CompanyModule,   
+    CoreModule,
+    AuthModule,
+    BoardModule,
+    SharedModule,
+    AdminModule,
+    CompanyModule,
 
-    // NgRx Store configuration
     StoreModule.forRoot({
       auth: authReducer,
       board: boardReducer,
@@ -67,7 +65,6 @@ import { TeamsEffects } from './store/effects/teams.effects';
       designers: designersReducer,
       teams: teamsReducer,
     }),
-    // NgRx Effects configuration
     EffectsModule.forRoot([
       AuthEffects,
       BoardEffects,
@@ -80,7 +77,7 @@ import { TeamsEffects } from './store/effects/teams.effects';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [
-    
+
   ],
   bootstrap: [AppComponent]
 })

@@ -13,7 +13,7 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return this.store.pipe(
       first(),
-      select(getAuthToken),
+      select((state) => new getAuthToken()),
       mergeMap((token) => {
         this.store.dispatch(loading());
         if (token) {

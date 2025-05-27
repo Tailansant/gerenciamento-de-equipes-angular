@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit, Inject, ElementRef, ViewChild } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router'; // NavigationEnd para escutar mudanças de rota
+import { Router, NavigationEnd } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators'; // Operador map para Observables
-import { MatDialog } from '@angular/material/dialog';
+]import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Imports para internacionalização (angular-l10n)
@@ -15,17 +14,18 @@ import {
   L10nTranslationService,
 } from 'angular-l10n';
 import { L10nSchema } from 'angular-l10n/lib/models/types';
-import { Languages } from '../../constants/l10n-config'; 
-import { i18nAsset } from '../../constants/i18n'; 
+import { Languages } from '../../constants/l10n-config';
+import { i18nAsset } from '../../constants/i18n';
 
 // Imports de ações e seletores NgRx
-import { logout, updateAuthStateFromLocalStorage } from 'src/app/store/actions/auth.actions'; 
-import { startSearchState } from 'src/app/store/actions/search.actions'; 
+import { logout, updateAuthStateFromLocalStorage } from 'src/app/store/actions/auth.actions';
+import { startSearchState } from 'src/app/store/actions/search.actions';
 import * as AuthSelectors from 'src/app/store/selectors/auth.selectors';
-import { getLoadStatus, getMessage, setMessage } from 'src/app/store/selectors/notifications.selectors'; 
+import { getLoadStatus, getMessage } from 'src/app/store/selectors/notifications.selectors';
 
 // Componentes Shared
 import { NotificationSnackBarComponent } from 'src/app/shared/components/notification-snack-bar/notification-snack-bar.component';o snack-bar
+
 
 const SNACK_BAR_TIME_DELAY_MS = 1500;
 
@@ -37,14 +37,14 @@ const SNACK_BAR_TIME_DELAY_MS = 1500;
 export class HeaderComponent implements OnInit, OnDestroy {
   // Propriedades do NgRx (isLoggedIn$, userRole$)
   isLoggedIn$!: Observable<boolean>;
-  userRole$!: Observable<string | null>; 
+  userRole$!: Observable<string | null>;
 
   // Propriedades de estado do componente
   isLogged = false;
   isLoad = false;
   isBoardsRoute = false;
   isSearchRoute = false;
-  userId = ''; 
+  userId = '';
 
   // Propriedades de internacionalização
   lang: string | null = this.translation.getLocale().language.toUpperCase();
@@ -71,7 +71,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Dispatch para atualizar estado de autenticação do localStorage (boa prática inicial)
-    this.store.dispatch(updateAuthStateFromLocalStorage());
+    this.store.dispatch(updateAuthStateFromLocalStorage({
+      user: null,
+      token: null,
+      isAuthenticated: false
+    }));
 
     // Observar o status de autenticação e o papel do usuário
     this.isLoggedIn$ = this.store.select(AuthSelectors.selectIsAuthenticated);
@@ -87,14 +91,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
       if (event instanceof NavigationEnd) {
         const { url } = event;
         this.isBoardsRoute = url === '/boards';
-        this.isSearchRoute = url.startsWith('/boards/search'); 
+        this.isSearchRoute = url.startsWith('/boards/search');
       }
     });
 
     // Subscrição para o ID do usuário (para pesquisa, etc.)
-    const subUserId = this.store.select(AuthSelectors.getUserId).subscribe((id) => {
+    const subUserId = this.store.select(AuthSelectors.selectUserId).subscribe((id) => {
       if (id) {
-        this.userId = id;
+        this.userId = id as string;
       } else {
         this.userId = '';
       }
@@ -132,29 +136,26 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe(); 
+    this.subscription.unsubscribe();
   }
 
-  // Método de logout (chamado pelo template)
-  onLogout(): void { 
-    this.store.dispatch(logout()); 
-    this.router.navigate(['/auth/sign-in']); 
+  onLogout(): void {
+    this.store.dispatch(logout());
+    this.router.navigate(['/auth/sign-in']);
   }
 
-  // Método para mudar o idioma
   setLocale(): void {
     const selectedLang = this.langs.nativeElement.value;
     if (selectedLang === Languages.english) {
       this.translation.setLocale(this.EN);
       this.lang = Languages.english;
-    } else if (selectedLang === Languages.russian) { 
+    } else if (selectedLang === Languages.russian) {
       this.translation.setLocale(this.RU);
       this.lang = Languages.russian;
     }
     localStorage.setItem('lang', this.lang!);
   }
 
-  // Método para iniciar a pesquisa
   search() {
     this.store.dispatch(
       startSearchState({ userId: this.userId, value: this.searchValue.nativeElement.value }),

@@ -1,4 +1,4 @@
-import { environment } from 'environments/environment';
+import { environment } from 'app/environments/environment';
 
 export enum Endpoints {
   AUTH_SIGN_IN = '/auth/signin',

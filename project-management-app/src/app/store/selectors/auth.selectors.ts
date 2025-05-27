@@ -1,11 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AuthState } from '../states/auth.state'; 
-import { AppState } from '../app.state'; 
+import { AuthState } from '../states/auth.state';
+import { AppState } from 'src/app/app.state';
 import { UserRole } from 'src/app/core/enums/user-role.enum';
 
 export const selectAuthState = createFeatureSelector<AppState, AuthState>('auth');
 
-// 2. Seletores para o status de autenticação e detalhes do usuário
 export const selectIsAuthenticated = createSelector(
   selectAuthState,
   (state: AuthState) => state.isAuthenticated // Retorna o status de autenticação
@@ -18,7 +17,7 @@ export const selectAuthLoading = createSelector(
 
 export const selectAuthError = createSelector(
   selectAuthState,
-  (state: AuthState) => state.errorMessage 
+  (state: AuthState) => state.errorMessage
 );
 
 export const selectCurrentUser = createSelector(
@@ -28,7 +27,7 @@ export const selectCurrentUser = createSelector(
 
 export const selectAuthToken = createSelector(
   selectAuthState,
-  (state: AuthState) => state.token 
+  (state: AuthState) => state.token
 );
 
 export const selectCurrentUserId = createSelector(
@@ -38,7 +37,7 @@ export const selectCurrentUserId = createSelector(
 
 export const selectUserLogin = createSelector(
   selectCurrentUser,
-  (user) => user ? user.login : null 
+  (user) => !user ? null : user.login
 );
 
 export const selectUserName = createSelector(
@@ -48,7 +47,7 @@ export const selectUserName = createSelector(
 
 export const selectUserRole = createSelector(
   selectCurrentUser,
-  (user) => user ? user.role : null 
+  (user) => user ? user.role : null
 );
 
 export const selectUserCompanyId = createSelector(
@@ -58,15 +57,22 @@ export const selectUserCompanyId = createSelector(
 
 export const selectIsAdmin = createSelector(
   selectUserRole,
-  (role) => role === UserRole.ADMIN 
+  (role) => role === UserRole.ADMIN
 );
 
 export const selectIsCompany = createSelector(
   selectUserRole,
-  (role) => role === UserRole.COMPANY 
+  (role) => role === UserRole.COMPANY
 );
 
 export const selectIsDesigner = createSelector(
   selectUserRole,
-  (role) => role === UserRole.DESIGNER 
+  (role) => role === UserRole.DESIGNER
 );
+
+export class getAuthToken {
+  constructor() {
+
+  }
+
+}

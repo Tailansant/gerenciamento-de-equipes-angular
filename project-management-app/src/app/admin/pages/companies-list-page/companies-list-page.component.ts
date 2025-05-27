@@ -20,9 +20,9 @@ export class CompaniesListPageComponent implements OnInit {
     displayedColumns: string[] = ['name', 'cnpj', 'address', 'actions']; // Colunas da tabela
 
     constructor(private store: Store, private dialog: MatDialog, private router: Router) {
-        this.companies$ = this.store.select(CompaniesSelectors.selectAllCompanies);
-        this.isLoading$ = this.store.select(CompaniesSelectors.selectCompaniesLoading);
-        this.error$ = this.store.select(CompaniesSelectors.selectCompaniesError);
+      this.companies$ = this.store.select(CompaniesSelectors.selectAllCompanies as any);
+      this.isLoading$ = this.store.select(CompaniesSelectors.selectCompaniesLoading as any);
+      this.error$ = this.store.select(CompaniesSelectors.selectCompaniesError as any);
     }
 
     ngOnInit(): void {
